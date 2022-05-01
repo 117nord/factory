@@ -20,6 +20,9 @@ class Node {
   // For now, just returning a status for the node.
   virtual NodeStatus simulate(std::chrono::milliseconds dt) = 0;
 
+  friend bool connect(Node& src_node, int src_port_idx, Node& dst_node,
+                      int dst_port_idx);
+
  protected:
   int id_;
   const NodeType type_;

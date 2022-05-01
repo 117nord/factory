@@ -8,8 +8,8 @@ int main() {
   Conveyor conveyor{};
   InventorySink sink{};
 
-  source.connect_to(conveyor);
-  conveyor.connect_to(sink);
+  connect(source, 0, conveyor, 0);
+  connect(conveyor, 0, sink, 0);
 
   source.simulate(1000ms);
   conveyor.simulate(1000ms);
