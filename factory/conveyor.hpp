@@ -1,11 +1,14 @@
+#ifndef CONVEYOR_HPP_INCLUDED
+#define CONVEYOR_HPP_INCLUDED
+
 #include <goods.hpp>
 #include <node.hpp>
 #include <vector>
 
 class Conveyor : public Node {
  public:
-  static const float kLength{5.0};        // length in meters
-  static const float kDefaultSpeed{1.0};  // speed in meters/second
+  static constexpr float kLength{5.0};        // length in meters
+  static constexpr float kDefaultSpeed{1.0};  // speed in meters/second
 
   Conveyor(float speed = kDefaultSpeed)
       : speed_{speed}, Node{NodeType::kTransform, 1, 1} {}
@@ -15,3 +18,5 @@ class Conveyor : public Node {
  private:
   float speed_;
 };
+
+#endif

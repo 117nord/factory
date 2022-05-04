@@ -1,3 +1,6 @@
+#ifndef INVENTORY_SOURCE_HPP_INCLUDED
+#define INVENTORY_SOURCE_HPP_INCLUDED
+
 #include <goods.hpp>
 #include <node.hpp>
 
@@ -10,3 +13,5 @@ class InventorySource : public Node {
  private:
   GoodsType target_;
 };
+
+#endif

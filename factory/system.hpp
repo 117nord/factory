@@ -1,3 +1,6 @@
+#ifndef SYSTEM_HPP_INCLUDED
+#define SYSTEM_HPP_INCLUDED
+
 #include <chrono>
 #include <node.hpp>
 #include <vector>
@@ -18,3 +21,5 @@ class System {
   // Not sure if I like this or not.
   std::vector<Node> nodes_;
 };
+
+#endif

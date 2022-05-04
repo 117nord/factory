@@ -1,3 +1,6 @@
+#ifndef GOODS_HPP_INCLUDED
+#define GOODS_HPP_INCLUDED
+
 enum class GoodsType { kUndefined, kCarbon, kIronOre };
 
 class Goods {
@@ -12,3 +15,5 @@ class Goods {
   const GoodsType type_;
   int temperature_;
 };
+
+#endif

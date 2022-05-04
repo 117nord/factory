@@ -11,6 +11,10 @@ int main() {
   connect(source, 0, conveyor, 0);
   connect(conveyor, 0, sink, 0);
 
+  source.debug_log();
+  conveyor.debug_log();
+  sink.debug_log();
+
   source.simulate(1000ms);
   conveyor.simulate(1000ms);
   sink.simulate(1000ms);

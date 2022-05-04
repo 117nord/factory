@@ -1,3 +1,6 @@
+#ifndef INVENTORY_SINK_HPP_INCLUDED
+#define INVENTORY_SINK_HPP_INCLUDED
+
 #include <goods.hpp>
 #include <node.hpp>
 
@@ -12,3 +15,5 @@ class InventorySink : public Node {
  private:
   GoodsType target_;
 };
+
+#endif

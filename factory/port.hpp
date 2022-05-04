@@ -1,3 +1,6 @@
+#ifndef PORT_HPP_INCLUDED
+#define PORT_HPP_INCLUDED
+
 #include <cassert>
 #include <goods.hpp>
 
@@ -7,7 +10,7 @@ class Port {
  public:
   Port() = delete;
   Port(Port& p) = delete;
-  Port(Port&& p) = delete;
+  Port(Port&& p) = default;
 
   Port(Node& owner) : owner_{owner}, connected_node_{nullptr} {};
 
@@ -18,29 +21,23 @@ class Port {
   Node* connected_node_;
 };
 
+class InputPort;
+
 class OutputPort : public Port {
   friend class InputPort;
 
  public:
   OutputPort() = delete;
   OutputPort(OutputPort& p) = delete;
-  OutputPort(OutputPort&& p) = delete;
+  OutputPort(OutputPort&& p) = default;
 
   OutputPort(Node& owner) : Port{owner}, port_{nullptr} {};
-  bool connect_to(Node& dst, int port_idx);
-  void disconnect() override {
-    if (connected_node_) {
-      assert((connected_node_ == port_->connected_node_) &&
-             "connections need to be bidirectional");
-    }
-    Port::disconnect();
-    if (port_) {
-      port_->connected_node_ = nullptr;
-      port_->port_ = nullptr;
-      port_ = nullptr;
-    }
-  };
+  bool connect_to(Node& dst, InputPort& port);
+  void disconnect() override;
   bool Put(Goods thing);
+#ifndef NDEBUG
+  void debug_log() const;
+#endif
 
  private:
   InputPort* port_;
@@ -52,20 +49,18 @@ class InputPort : public Port {
  public:
   InputPort() = delete;
   InputPort(InputPort& p) = delete;
-  InputPort(InputPort&& p) = delete;
+  InputPort(InputPort&& p) = default;
 
   InputPort(Node& owner) : Port{owner}, port_{nullptr} {};
 
-  void disconnect() override {
-    Port::disconnect();
-    if (port_) {
-      port_->connected_node_ = nullptr;
-      port_->port_ = nullptr;
-      port_ = nullptr;
-    }
-  };
+  bool connect_from(Node& src, OutputPort& port);
+  void disconnect() override;
   bool Take(Goods thing);
-
+#ifndef NDEBUG
+  void debug_log() const;
+#endif
  private:
   OutputPort* port_;
 };
+
+#endif
