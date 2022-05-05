@@ -1,6 +1,8 @@
 # factory
 Exploration of a product transformation system.
 
+# wip
+
 # todo
 
 1. Node is the basic construction block of the system but I need multiple "types" of nodes: conveyors, smelters, inventory_source, inventory_sink, ...
@@ -19,3 +21,10 @@ But the simulation function can't access the Node's member variables.
 Maybe I can use the Barton-Nackman trick to have the template declare the fucntion as a friend or something? https://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/Truc-Barton-Nackman.html
 
 Let's start with a class hierarchy, it may not be that bad in terms of boiler plate and it will be simple.
+
+# done
+
+- Now using a node pointer vector in the node class to store nodes.
+  - Because using base class pointers is the only way to store polymorphic objects in a vector.
+- It is like a single, global factory.
+- using pointers as node references.

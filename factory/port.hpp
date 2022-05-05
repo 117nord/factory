@@ -12,12 +12,12 @@ class Port {
   Port(Port& p) = delete;
   Port(Port&& p) = default;
 
-  Port(Node& owner) : owner_{owner}, connected_node_{nullptr} {};
+  Port(Node* owner) : owner_{owner}, connected_node_{nullptr} {};
 
   virtual void disconnect() { connected_node_ = nullptr; };
 
  protected:
-  Node& owner_;
+  Node* owner_;
   Node* connected_node_;
 };
 
@@ -31,8 +31,8 @@ class OutputPort : public Port {
   OutputPort(OutputPort& p) = delete;
   OutputPort(OutputPort&& p) = default;
 
-  OutputPort(Node& owner) : Port{owner}, port_{nullptr} {};
-  bool connect_to(Node& dst, InputPort& port);
+  OutputPort(Node* owner) : Port{owner}, port_{nullptr} {};
+  bool connect_to(Node* dst, InputPort& port);
   void disconnect() override;
   bool Put(Goods thing);
 #ifndef NDEBUG
@@ -51,9 +51,9 @@ class InputPort : public Port {
   InputPort(InputPort& p) = delete;
   InputPort(InputPort&& p) = default;
 
-  InputPort(Node& owner) : Port{owner}, port_{nullptr} {};
+  InputPort(Node* owner) : Port{owner}, port_{nullptr} {};
 
-  bool connect_from(Node& src, OutputPort& port);
+  bool connect_from(Node* src, OutputPort& port);
   void disconnect() override;
   bool Take(Goods thing);
 #ifndef NDEBUG

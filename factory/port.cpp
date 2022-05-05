@@ -2,9 +2,9 @@
 #include <node.hpp>
 #include <port.hpp>
 
-bool OutputPort::connect_to(Node& dst, InputPort& port) {
+bool OutputPort::connect_to(Node* dst, InputPort& port) {
   disconnect();
-  connected_node_ = &dst;
+  connected_node_ = dst;
   port_ = &port;
 
   return true;
@@ -26,7 +26,7 @@ void OutputPort::disconnect() {
 #ifndef NDEBUG
 void OutputPort::debug_log() const {
   std::ostream& ostream = logger(LogLevel::kDebug);
-  ostream << "Output port of node " << owner_.get_id() << " connected to node "
+  ostream << "Output port of node " << owner_->get_id() << " connected to node "
           << connected_node_->get_id() << "\n";
 }
 #endif
@@ -40,9 +40,9 @@ void InputPort::disconnect() {
   }
 };
 
-bool InputPort::connect_from(Node& src, OutputPort& port) {
+bool InputPort::connect_from(Node* src, OutputPort& port) {
   disconnect();
-  connected_node_ = &src;
+  connected_node_ = src;
   port_ = &port;
   return true;
 }
@@ -50,7 +50,7 @@ bool InputPort::connect_from(Node& src, OutputPort& port) {
 #ifndef NDEBUG
 void InputPort::debug_log() const {
   std::ostream& ostream = logger(LogLevel::kDebug);
-  ostream << "Input port of node " << owner_.get_id() << " connected to node "
+  ostream << "Input port of node " << owner_->get_id() << " connected to node "
           << connected_node_->get_id() << "\n";
 }
 #endif
