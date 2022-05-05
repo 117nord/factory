@@ -16,6 +16,7 @@ add_executable(factory
                factory/main.cpp
                factory/node.cpp
                factory/port.cpp
+               factory/system.cpp
                )
 
 target_include_directories(factory PUBLIC

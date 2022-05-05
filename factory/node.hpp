@@ -26,12 +26,11 @@ class Node {
   virtual NodeStatus simulate(std::chrono::milliseconds dt) = 0;
 
 #ifndef NDEBUG
-  static void log_all_nodes();
   void debug_log() const;
 #endif
 
   // Connects the ports in both direction.
-  friend bool connect(Node* src_node, int src_port_idx, Node* dst_node,
+  friend bool connect(Node& src_node, int src_port_idx, Node& dst_node,
                       int dst_port_idx);
 
  protected:
@@ -40,7 +39,9 @@ class Node {
   std::vector<InputPort> inputs_;
   std::vector<OutputPort> outputs_;
   std::vector<Goods> content_;
-  static std::vector<Node*> nodes_;
+
+ private:
+  static std::size_t last_id;
 };
 
 #endif
