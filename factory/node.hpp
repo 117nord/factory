@@ -11,6 +11,10 @@ enum class NodeStatus { kOk, kStarved, kJammed, kError };
 class Node {
  public:
   Node() = delete;
+  Node(const Node&) = delete;
+  Node(Node&&) = default;
+  Node& operator=(Node&) = delete;
+
   Node(NodeType type, std::size_t nb_inputs,
        std::size_t nb_outputs /* simulation function parameter */);
   virtual ~Node() = default;
@@ -34,14 +38,14 @@ class Node {
                       int dst_port_idx);
 
  protected:
-  std::size_t id_;
-  const NodeType type_;
   std::vector<InputPort> inputs_;
   std::vector<OutputPort> outputs_;
   std::vector<Goods> content_;
 
  private:
   static std::size_t last_id;
+  std::size_t id_;  // const
+  NodeType type_;   // const
 };
 
 #endif
