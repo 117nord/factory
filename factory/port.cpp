@@ -2,6 +2,8 @@
 #include <node.hpp>
 #include <port.hpp>
 
+Port::~Port() { disconnect(); };
+
 bool OutputPort::connect_to(Node* dst, InputPort& port) {
   disconnect();
   connected_node_ = dst;
@@ -11,8 +13,11 @@ bool OutputPort::connect_to(Node* dst, InputPort& port) {
 };
 
 void OutputPort::disconnect() {
+  logger(LogLevel::kDebug) << "Disconnecting node " << owner_->get_id()
+                           << " from node " << connected_node_->get_id();
+
   if (connected_node_) {
-    assert((connected_node_ == port_->connected_node_) &&
+    assert((owner_ == port_->connected_node_) &&
            "connections need to be bidirectional");
   }
   Port::disconnect();

@@ -3,6 +3,10 @@ Exploration of a product transformation system.
 
 # wip
 
+- I need to improve my cmake stuff to support debug and release builds.
+- build in debug
+- debug the current crash
+
 # todo
 
 1. Node is the basic construction block of the system but I need multiple "types" of nodes: conveyors, smelters, inventory_source, inventory_sink, ...

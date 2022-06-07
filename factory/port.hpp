@@ -13,7 +13,7 @@ class Port {
   Port(Port&& p) = default;
 
   Port(Node* owner) : owner_{owner}, connected_node_{nullptr} {};
-
+  virtual ~Port();
   virtual void disconnect() { connected_node_ = nullptr; };
 
  protected:
@@ -30,7 +30,6 @@ class OutputPort : public Port {
   OutputPort() = delete;
   OutputPort(OutputPort& p) = delete;
   OutputPort(OutputPort&& p) = default;
-
   OutputPort(Node* owner) : Port{owner}, port_{nullptr} {};
   bool connect_to(Node* dst, InputPort& port);
   void disconnect() override;

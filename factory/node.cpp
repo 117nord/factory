@@ -35,6 +35,9 @@ void Node::debug_log() const {
 
 bool connect(Node& src_node, int src_port_idx, Node& dst_node,
              int dst_port_idx) {
+  logger(LogLevel::kDebug) << "Connecting node " << src_node.get_id()
+                           << " to node " << dst_node.get_id() << std::endl;
+
   src_node.outputs_[src_port_idx].connect_to(&dst_node,
                                              dst_node.inputs_[dst_port_idx]);
   dst_node.inputs_[dst_port_idx].connect_from(&src_node,
